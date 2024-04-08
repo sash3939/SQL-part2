@@ -9,7 +9,25 @@
 
 
 ### Решение 1
+[more_300](https://github.com/sash3939/SQL-part2/assets/156709540/1eaea02f-619b-4f6f-85a4-d88381366a48)
 
+SELECT 
+    e.last_name, 
+    e.first_name, 
+    s.address_id AS city,
+    COUNT(customer_id) AS sum_users
+FROM 
+    sakila.staff e
+JOIN 
+    sakila.store s ON e.store_id = s.store_id
+JOIN 
+    sakila.customer c ON s.store_id = c.store_id
+GROUP BY 
+    e.last_name, 
+    e.first_name, 
+    s.address_id
+HAVING 
+    COUNT(c.customer_id) > 300;
 
 ---
 
