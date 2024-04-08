@@ -23,7 +23,7 @@
 
 SELECT COUNT(*) AS more_avg_length
 FROM sakila.film
-WHERE length > (SELECT AVG(`length`) FROM sakila.film);
+WHERE length > (SELECT AVG('length') FROM sakila.film);
 
 ---
 
