@@ -18,7 +18,7 @@
 
 Получите количество фильмов, продолжительность которых больше средней продолжительности всех фильмов.
 
-
+### Решение 2
 [length](https://github.com/sash3939/SQL-part2/assets/156709540/f6889261-3a17-490f-923a-5dda11860e6b)
 
 SELECT COUNT(*) AS more_avg_length
@@ -31,6 +31,22 @@ WHERE length > (SELECT AVG('length') FROM sakila.film);
 
 Получите информацию, за какой месяц была получена наибольшая сумма платежей, и добавьте информацию по количеству аренд за этот месяц.
 
+### Решение 3
+[rental](https://github.com/sash3939/SQL-part2/assets/156709540/5cd104de-4adf-4fe3-97a9-44e4b2a8336a)
+
+SELECT 
+    DATE_FORMAT(p.payment_date, '%Y-%m') AS month,
+    SUM(p.amount) AS max_payment_amount,
+    COUNT(r.rental_id) AS rental_count
+FROM 
+    sakila.payment p
+JOIN 
+    sakila.rental r ON DATE_FORMAT(p.payment_date, '%Y-%m') = DATE_FORMAT(r.rental_date, '%Y-%m')
+GROUP BY 
+    DATE_FORMAT(p.payment_date, '%Y-%m')
+ORDER BY 
+    max_payment_amount DESC
+LIMIT 1;
 
 ## Дополнительные задания (со звёздочкой*)
 Эти задания дополнительные, то есть не обязательные к выполнению, и никак не повлияют на получение вами зачёта по этому домашнему заданию. Вы можете их выполнить, если хотите глубже шире разобраться в материале.
