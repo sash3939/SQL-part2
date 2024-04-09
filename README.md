@@ -9,25 +9,28 @@
 
 
 ### Решение 1
-[more_300](https://github.com/sash3939/SQL-part2/assets/156709540/1eaea02f-619b-4f6f-85a4-d88381366a48)
+[more_300](https://github.com/sash3939/SQL-part2/assets/156709540/233a93c9-c013-426e-b21e-47b2827d0a8d)
 
-SELECT 
-    e.last_name, 
-    e.first_name, 
-    s.address_id AS city,
+
+select
+	concat(st.last_name, st.first_name) as staff_name, ci.city,
     COUNT(customer_id) AS sum_users
 FROM 
-    sakila.staff e
-JOIN 
-    sakila.store s ON e.store_id = s.store_id
-JOIN 
-    sakila.customer c ON s.store_id = c.store_id
+    sakila.staff st
+INNER JOIN 
+    sakila.store sto ON sto.store_id = st.store_id
+INNER JOIN 
+    sakila.customer cus ON cus.store_id = sto.store_id
+inner join
+	sakila.address ad on ad.address_id  = st.address_id
+INNER join
+	sakila.city ci on ci.city_id = ad.city_id
 GROUP BY 
-    e.last_name, 
-    e.first_name, 
-    s.address_id
+    st.last_name,
+    st.first_name,
+    ci.city
 HAVING 
-    COUNT(c.customer_id) > 300;
+    COUNT(customer_id) > 300
 
 ---
 
