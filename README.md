@@ -79,3 +79,14 @@ LIMIT 1;
 ### Задание 5*
 
 Найдите фильмы, которые ни разу не брали в аренду.
+
+### Решение 5*
+
+[no_rental](https://github.com/sash3939/SQL-part2/assets/156709540/78c52013-9090-4425-9061-9bf604e148b2)
+
+
+SELECT f.film_id, f.title
+FROM sakila.film AS f
+LEFT JOIN sakila.rental AS r ON r.inventory_id = f.film_id 
+left JOIN sakila.inventory as i ON r.inventory_id = f.film_id
+WHERE r.inventory_id  IS NULL;
